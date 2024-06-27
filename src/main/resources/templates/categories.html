@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des catégories</title>
+</head>
+<body>
+
+    <main>
+        <h1>Liste des catégories</h1>
+        <p th:if="${categories.isEmpty()}">Aucune catégorie enregistrée</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="c : ${categories}">
+                    <td th:text="${c.name}"></td>
+                    <td th:text="${c.description}"></td>
+                    <td>
+                        <a th:href="@{/form-category/{id}(id=${c.id})}">Modifier</a>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <a th:href="@{/form-category}">Ajouter une catégorie</a>
+        <a th:href="@{/}">Retour à la liste des recettes</a>
+
+    </main>
+
+</body>
+</html>

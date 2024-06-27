@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire recette</title>
+</head>
+<body>
+
+    <main>
+        <h1>Formulaire de recette</h1>
+        <form method="post" th:action="@{/form-recipe}" th:object="${recipe}">
+            <input th:field="*{id}" type="hidden">
+            <label for="name">Nom</label>
+            <input th:field="*{name}" type="text" id="name" name="name" required>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+            <label for="category">Catégorie</label>
+            <select id="category" name="category" th:field="*{categoryId}" required>
+                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+            </select>
+
+            <label for="instructions">Instructions</label>
+            <textarea id="instructions" name="instructions" th:field="*{instructions}" required></textarea>
+            <span th:if="${#fields.hasErrors('instructions')}" th:errors="*{instructions}"></span>
+
+            <label for="ingredients">Ingrédients</label>
+            <textarea id="ingredients" name="ingredients" th:field="*{ingredients}" required></textarea>
+            <span th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"></span>
+
+            <button type="submit">Valider</button>
+        </form>
+
+        <a th:href="@{/}">Retour à la liste des recettes</a>
+
+    </main>
+
+</body>
+</html>

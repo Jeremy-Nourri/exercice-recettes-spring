@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Page d'accueil recette</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+    <main>
+
+        <h1 class="mx-auto my-4 text-3xl font-bold text-center text-gray-800"
+        >Bienvenue ! Voici nos recettes</h1>
+
+        <table class="table-auto border-collapse border border-slate-500 mx-auto my-4">
+            <thead>
+                <tr>
+                    <th class="border border-slate-600 p-4">Nom</th>
+                    <th class="border border-slate-600 p-4">Catégorie</th>
+                    <th class="border border-slate-600 p-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="recipe : ${recipes}" class="border-b border-gray-200">
+                    <td th:text="${recipe.name}"></td>
+                    <td th:text="${recipe.categoryId}"></td>
+                    <td>
+                        <a class="btn bg-blue" th:href="@{/recipe/{id}(id=${recipe.id})}">Voir</a>
+                        <a class="btn bg-yellow" th:href="@{/recipe/update/{id}(id=${recipe.id})}">Modifier</a>
+                        <a class="btn bg-red" th:href="@{/recipe/delete/{id}(id=${recipe.id})}">Supprimer</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="w-1/4 text-center mx-auto my-4" th:if="${recipes.isEmpty()}">Aucune recette enregistrée</p>
+
+        <a class="block btn w-1/4 text-center mx-auto my-4 " th:href="@{/form-recipe}">Ajouter une recette</a>
+
+        <a class="block w-1/4 text-center mx-auto my-4 bg-blue" th:href="@{/form-category}">Ajouter une catégorie</a>
+
+    </main>
+
+</body>
+</html>
